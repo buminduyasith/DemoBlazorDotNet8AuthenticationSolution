@@ -8,18 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-
 
 //Starting ...
 builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddAuthentication();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddAuthentication()
+    .AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<AppDbContext>()
+    .AddApiEndpoints()
+    .AddClaimsPrincipalFactory<AppClaimsFactory>(); // <--- here
 
 
 builder.Services.AddSwaggerGen(options =>
@@ -35,7 +36,16 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 //Ending...
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -44,16 +54,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseWebAssemblyDebugging();
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAnyOrigin"); // Use the CORS policy here
 app.MapIdentityApi<IdentityUser>();
 app.UseAuthorization();
 
-app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
+
 
 app.Run();

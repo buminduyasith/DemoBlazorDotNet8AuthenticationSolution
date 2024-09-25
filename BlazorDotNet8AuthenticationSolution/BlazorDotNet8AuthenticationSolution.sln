@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{42DE93B3-DBF6-4C55-8E53-F857150A6124}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIAuth", "WebAPIAuth\WebAPIAuth.csproj", "{944D1E7E-4A11-46CE-ACCD-674A4D46CB38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{42DE93B3-DBF6-4C55-8E53-F857150A6124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DE93B3-DBF6-4C55-8E53-F857150A6124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DE93B3-DBF6-4C55-8E53-F857150A6124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944D1E7E-4A11-46CE-ACCD-674A4D46CB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944D1E7E-4A11-46CE-ACCD-674A4D46CB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944D1E7E-4A11-46CE-ACCD-674A4D46CB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944D1E7E-4A11-46CE-ACCD-674A4D46CB38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
